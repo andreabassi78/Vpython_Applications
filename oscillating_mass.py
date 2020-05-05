@@ -5,14 +5,18 @@ Created on Mon May  4 00:17:57 2020
 @author: Andrea Bassi
 """
 import vpython as vp
+import numpy as np
+
+
 
 K = 1 # Elastic constant
 M = 1 # Mass
 LENGTH = 1 # Spring length
 RADIUS = 0.15*LENGTH # Mass radius
 vp.scene.center = vp.vector(0,0,0)
+
 # Set temporal sampling to 1/100 of the inverse of the oscillation frequency
-dt = 0.01*(2*vp.pi*vp.sqrt(M/K)) 
+dt = 0.01*(2*np.pi*np.sqrt(M/K)) 
 axes = [vp.vector(1,0,0), vp.vector(0,1,0), vp.vector(0,0,1)]
 
 rest_position    = vp.vector(LENGTH,0,0)
@@ -40,6 +44,7 @@ class oscillator:
         spring.radius = 0.3*self.mass.radius
         spring.color = vp.color.orange
         self.spring = spring
+        
         
     def set_position(self, velocity,dt):
         self.mass.pos = self.mass.pos + velocity*dt

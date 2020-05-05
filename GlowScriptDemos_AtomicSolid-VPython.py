@@ -80,7 +80,7 @@ class crystal:
         spring.pos = start.pos
         spring.axis = end.pos-start.pos
         spring.visible = visible
-        spring.thickness = 0.01
+        spring.thickness = 0.02
         spring.radius = 0.5*atom_radius
         spring.length = spacing
         spring.start = start
@@ -91,7 +91,7 @@ class crystal:
 c = crystal(N, atom_radius, spacing, 0.1*spacing*vp.sqrt(k/m))
 
 while True:
-    vp.rate(30)
+    vp.rate(60)
     for atom in c.atoms:
         if atom.visible:
             atom.pos = atom.pos + atom.momentum/m*dt
