@@ -9,7 +9,7 @@ import vpython as vp
 
 #vp.scene.center = vp.vector(0,0,0)
 
-axes = [vp.vector(1,0,0), vp.vector(0,1,0), vp.vector(0,0,1)]
+#axes = [vp.vector(1,0,0), vp.vector(0,1,0), vp.vector(0,0,1)]
 
 vp.scene.caption= "N body problem"
 
@@ -29,7 +29,8 @@ class system:
             self.bodies.append(body)
     def set_radius(self,mass):
         # Draw a sphere with a radius proportional to the cubic root of the mass
-        r = 0.04*mass**(1/3) 
+        scale = 1e-1
+        r = scale * (3/4/vp.pi*mass)**(1/3) 
         return r
     
     def set_position(self, dt):
@@ -50,10 +51,8 @@ class system:
                     distance = vp.mag (body.pos-other_body.pos)
                     if distance < body.radius and body.visible == True and other_body.visible == True:
                         self.collision(body,other_body)
-                    if distance >0:
+                    elif body.visible == True and other_body.visible == True:   
                         acceleration += - (G* other_body.mass) * (body.pos-other_body.pos)/ distance**3
-                    else:
-                        acceleration += vp.vector(0,0,0)
             self.accelerations.append(acceleration)
             
     def calculate_center_of_mass(self):
@@ -65,9 +64,8 @@ class system:
             v_m += body.mass * body.velocity
             m_tot += body.mass
         #print(m_tot)
-        print(vp.mag(v_m/m_tot))
-        
-        # there is something wrong because the CM is moving    
+        print('total momentum:',vp.mag(v_m/m_tot),'\n'
+              'total mass:', m_tot)
         return (c_m/m_tot)
         
                     
@@ -75,6 +73,7 @@ class system:
         m1 = body1.mass
         m2 = body2.mass
         # grow body 1 
+        body1.pos = (body1.pos*m1+body2.pos*m2)/(m1+m2)
         body1.velocity = (body1.velocity*m1+body2.velocity*m2)/(m1+m2)
         body1.mass += body2.mass
         body1.radius = self.set_radius(body1.mass)
@@ -107,8 +106,10 @@ for idx in range(N):
 
 sys = system(masses, initial_positions, initial_velocities)
 
+vp.rate(160)
+
 while True:   
-    vp.rate(100)
+    
     sys.set_position(dt)        
     sys.calculate_acceleration()
     sys.set_velocity(dt) 
