@@ -7,13 +7,13 @@ from vpython import *
 
 win = 500
 
-Natoms = 200  # change this to have more or fewer atoms
+Natoms = 10  # change this to have more or fewer atoms
 
 # Typical values
 L = 1 # container is a cube L on a side
 gray = color.gray(0.7) # color of edges of container
 mass = 4E-3/6E23 # helium mass
-Ratom = 0.02 # wildly exaggerated size of helium atom
+Ratom = 0.07 # wildly exaggerated size of helium atom
 k = 1.4E-23 # Boltzmann constant
 T = 300 # around room temperature
 dt = 1E-5
@@ -52,16 +52,14 @@ pavg = sqrt(2*mass*1.5*k*T) # average kinetic energy p**2/(2mass) = (3/2)kT
 for i in range(Natoms):
     x = L*random()-L/2
     y = L*random()-L/2
-    z = L*random()-L/2
-    if i == 0:
-        Atoms.append(sphere(pos=vector(x,y,z), radius=Ratom, color=color.cyan, make_trail=True, retain=100, trail_radius=0.3*Ratom))
-    else: Atoms.append(sphere(pos=vector(x,y,z), radius=Ratom, color=gray))
+    z = 0
+    Atoms.append(sphere(pos=vector(x,y,z), radius=Ratom, color=gray))
     apos.append(vec(x,y,z))
     theta = pi*random()
     phi = 2*pi*random()
     px = pavg*sin(theta)*cos(phi)
     py = pavg*sin(theta)*sin(phi)
-    pz = pavg*cos(theta)
+    pz = 0
     p.append(vector(px,py,pz))
 
 deltav = 100 # binning for v histogram
@@ -109,7 +107,7 @@ def checkCollisions():
 nhisto = 0 # number of histogram snapshots to average
 
 while True:
-    rate(300)
+    rate(50)
     # Accumulate and average histogram snapshots
     for i in range(len(accum)): accum[i][1] = (nhisto*accum[i][1] + histo[i])/(nhisto+1)
     if nhisto % 10 == 0:

@@ -12,7 +12,7 @@ axis_y = arrow(pos=vector(0,0,0), axis=vector(0,1,0),shaftwidth=0.01)
 
 #body = sphere(radius = 0.05)
 body = sphere(radius = 0.05, make_trail=True, trail_type="points",
-              interval=10, retain=50)
+              trail_color=color.cyan, interval=20, retain=50)
 
 body.color = color.orange 
 

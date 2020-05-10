@@ -39,8 +39,6 @@ class system:
     def set_velocity(self, dt):
         for index, b in enumerate(self.bodies):
             b.velocity = b.velocity + self.accelerations[index]*dt
-            #b.acceleration_arrow.pos = b.pos
-            #b.acceleration_arrow.axis = self.accelerations[index]/100
     
     def calculate_acceleration(self):
         self.accelerations = [] 
@@ -55,7 +53,6 @@ class system:
                         # in case of collision fuse the 2 objects and recalculate the acceleration repeating the while cycle
                         self.collision(body,other_body)
                         acceleration =  vector(0,0,0) 
-                        print(index,other_index)
                         other_index = 0
                         continue
                     elif body.visible == True and  other_body.visible == True:  
@@ -98,7 +95,7 @@ class system:
 G = 6.67408e-11 # Gravitational constant. All Units are in SI
 
 # Set temporal sampling in seconds 
-dt = 1200 
+dt = 600 
 
 N = 50 # number of bodies
 
@@ -122,7 +119,7 @@ trace = sphere(radius = 1e6,
                trail_type="points",
                trail_radius= 1e5,
                interval=20,
-               retain=100)
+               retain=50)
 
 while True:   
     
