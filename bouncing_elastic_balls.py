@@ -8,29 +8,11 @@ from vpython import scene, vector, curve, color, sphere, mag, rate, dot, cross
 import numpy as np
 import random
 
-scene.caption= "Bouncing balls"
 pi = np.pi
 
-L=2
-d = L/2
-r = 0.005
-gray = color.gray(0.7)
-boxbottom = curve(color=gray, radius=r)
-boxbottom.append([vector(-d,-d,-d), vector(-d,-d,d), vector(d,-d,d), vector(d,-d,-d), vector(-d,-d,-d)])
-boxtop = curve(color=gray, radius=r)
-boxtop.append([vector(-d,d,-d), vector(-d,d,d), vector(d,d,d), vector(d,d,-d), vector(-d,d,-d)])
-vert1 = curve(color=gray, radius=r)
-vert2 = curve(color=gray, radius=r)
-vert3 = curve(color=gray, radius=r)
-vert4 = curve(color=gray, radius=r)
-vert1.append([vector(-d,-d,-d), vector(-d,d,-d)])
-vert2.append([vector(-d,-d,d), vector(-d,d,d)])
-vert3.append([vector(d,-d,d), vector(d,d,d)])
-vert4.append([vector(d,-d,-d), vector(d,d,-d)])
-
 class system:
-        
-    def __init__(self, ms, r0s, v0s, dt ):
+           
+    def __init__(self, ms, r0s, v0s, dt):
         self.bodies = []
         self.collided_couples = []
         self.attached_couples = []
@@ -115,8 +97,10 @@ class system:
                 self.bodies.remove(body)
         self.collided_couples.clear()
         
-    def inelastic_ball_collision(self):
-        # balls are elastic (springs) with a shear friction
+    def inelastic_collision(self):
+        # balls are modeled as elastic (springs) with a shear friction
+        K = 40 # elastic constant
+        B = 1 # damping # if B=0 collision is elastic
         acceleration0 = vector(0,0,0)
         acceleration1 = vector(0,0,0)
         for indexs in self.collided_couples: 
@@ -125,17 +109,15 @@ class system:
             vrel = body0.velocity - body1.velocity
             rrel = body0.pos-body1.pos
             distance =  mag (rrel)
-            F0 = K * rrel / distance * (body0.radius+body1.radius-distance)  - B * body0.velocity
-            F1 = - K * rrel / distance * (body0.radius+body1.radius-distance)  - B * body1.velocity
-            acceleration0 += F0 / body0.mass
-            acceleration1 += F1 / body1.mass
-            KE_in = 1/2 * body0.mass * mag(body0.velocity)**2 + 1/2 * body1.mass * mag(body1.velocity)**2
+            F = + K * rrel / distance * (body0.radius+body1.radius-distance)  - B * vrel
+            acceleration0 = + F / body0.mass
+            acceleration1 = - F / body1.mass
             body0.velocity += acceleration0*self.dt
             body1.velocity += acceleration1*self.dt    
         self.collided_couples.clear()
         
         
-    def inelastic_collision(self):
+    def partially_inelastic_collision(self):
         # totally inelastic collision, but if the couple of bodies collides with others can breack 
         bodies_to_remove = []
         for indexs in self.collided_couples: 
@@ -188,46 +170,66 @@ class system:
         return c_m/m_tot , KE        
       
          
-K = 50 # elastic constant
-B = 5 # damping
-
-# Set temporal sampling in seconds 
-delta_t = 0.005 
-
-N =60# number of bodies
-
-masses =[]
-initial_positions = []
-initial_velocities = []
-
-for idx in range(N): 
-    # Each body has the same mass: the mass of the Moon 
-    masses.append(1)   # kg  
-    # Place the masses randomly in space
-    initial_positions.append(vector.random()) # m
-    # Give random initial velocities
-    initial_velocities.append(vector.random()) # m/2
-
-sys = system(masses, initial_positions, initial_velocities, delta_t)
-
-# add a trace to the center of mass
-trace = sphere(radius = 1e-2,
-                make_trail=True,
-                trail_type="points",
-                trail_radius= 5e-3,
-                interval=5,
-                retain=50) 
-
-while True:   
+if __name__ == '__main__':
     
-    rate(100)
     
-    sys.set_position()
-    sys.bounce_on_border()        
+    scene.caption= "Bouncing balls"
+
+    # Draw box
+    L=2
+    d = L/2
+    r = 0.005
+    gray = color.gray(0.7)
+    boxbottom = curve(color=gray, radius=r)
+    boxbottom.append([vector(-d,-d,-d), vector(-d,-d,d), vector(d,-d,d), vector(d,-d,-d), vector(-d,-d,-d)])
+    boxtop = curve(color=gray, radius=r)
+    boxtop.append([vector(-d,d,-d), vector(-d,d,d), vector(d,d,d), vector(d,d,-d), vector(-d,d,-d)])
+    vert1 = curve(color=gray, radius=r)
+    vert2 = curve(color=gray, radius=r)
+    vert3 = curve(color=gray, radius=r)
+    vert4 = curve(color=gray, radius=r)
+    vert1.append([vector(-d,-d,-d), vector(-d,d,-d)])
+    vert2.append([vector(-d,-d,d), vector(-d,d,d)])
+    vert3.append([vector(d,-d,d), vector(d,d,d)])
+    vert4.append([vector(d,-d,-d), vector(d,d,-d)])
     
-    sys.check_collisions()
-    sys.totally_inelastic_collision()
+    # Set temporal sampling in seconds 
+    delta_t = 0.005 
     
-    center_mass, KE = sys.calculate_center_of_mass_and_energy()
-    trace.pos = center_mass
+    N =30 # number of bodies
     
+    masses =[]
+    initial_positions = []
+    initial_velocities = []
+    
+    for idx in range(N): 
+        # Each body has the same mass: the mass of the Moon 
+        masses.append(1)   # kg  
+        # Place the masses randomly in space
+        initial_positions.append(vector.random()) # m
+        # Give random initial velocities
+        initial_velocities.append(vector.random()) # m/2
+    
+    sys = system(masses, initial_positions, initial_velocities, delta_t)
+    
+    # add a trace to the center of mass
+    trace = sphere(radius = 1e-2,
+                    make_trail=True,
+                    trail_type="points",
+                    trail_radius= 5e-3,
+                    interval=5,
+                    retain=50) 
+    
+    while True:   
+        
+        rate(150)
+        
+        sys.set_position()
+        sys.bounce_on_border()        
+        
+        sys.check_collisions()
+        sys.inelastic_collision()
+        
+        center_mass, KE = sys.calculate_center_of_mass_and_energy()
+        trace.pos = center_mass
+        

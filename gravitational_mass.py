@@ -6,11 +6,7 @@ Created on Mon May  4 20:12:04 2020
 """
 from vpython import scene, vector, arrow, color, sphere, pi, mag, rate, attach_trail
 
-#axis_x =  arrow(pos= vector(0,0,0), axis= vector(1,0,0),shaftwidth=0.01)            
-#axis_y =  arrow(pos= vector(0,0,0), axis= vector(0,1,0),shaftwidth=0.01)            
-#axis_z =  arrow(pos= vector(0,0,0), axis= vector(0,0,1),shaftwidth=0.01)            
-
-scene.caption= "N body problem"
+G = 6.67408e-11 # Gravitational constant. All Units are in SI
 
 class system:
         
@@ -87,13 +83,9 @@ class system:
         body2.mass = 0
         body2.visible = False
         body2.radius = self.set_radius(body2.mass)
-        
-        print("collision")
+        #print("collision")
                
-
         
-G = 6.67408e-11 # Gravitational constant. All Units are in SI
-
 # Set temporal sampling in seconds 
 dt = 600 
 
@@ -105,7 +97,7 @@ initial_velocities = []
 
 for idx in range(N): 
     # Each body has the same mass: the mass of the Moon 
-    masses.append(7.342e22)   # kg  
+    masses.append(7.342e22) # kg  
     # Place the masses randomly in space
     initial_positions.append( vector.random()*1e8) # m
     # Give random initial velocities
@@ -120,6 +112,8 @@ trace = sphere(radius = 1e6,
                trail_radius= 1e5,
                interval=20,
                retain=50)
+
+scene.caption= "N body problem"
 
 while True:   
     
