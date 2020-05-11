@@ -29,9 +29,9 @@ class system:
             self.bodies.append(body)
     
     
-    def set_radius(self,mass):
+    def set_radius(self, mass, density = 200):
         # Draw a sphere with a radius proportional to the cubic root of the volume
-        density = 200 # kg/m^3
+        # density is in kg/m^3
         radius = (3/(4*pi)*mass/density)**(1/3) 
         return radius
     
@@ -97,10 +97,10 @@ class system:
                 self.bodies.remove(body)
         self.collided_couples.clear()
         
-    def inelastic_collision(self):
+    def inelastic_collision(self, K=40, B=1):
         # balls are modeled as elastic (springs) with a shear friction
-        K = 40 # elastic constant
-        B = 1 # damping # if B=0 collision is elastic
+        # K elastic constant
+        # B damping coefficient # if B=0 collision is elastic
         acceleration0 = vector(0,0,0)
         acceleration1 = vector(0,0,0)
         for indexs in self.collided_couples: 
@@ -140,7 +140,7 @@ class system:
         self.collided_couples.clear()
         
         
-    def bounce_on_border(self):     
+    def bounce_on_border(self, L = 2):     
         for index,body in enumerate(self.bodies):
             loc = body.pos
             vel = body.velocity
@@ -225,7 +225,7 @@ if __name__ == '__main__':
         rate(150)
         
         sys.set_position()
-        sys.bounce_on_border()        
+        sys.bounce_on_border(L)        
         
         sys.check_collisions()
         sys.inelastic_collision()
