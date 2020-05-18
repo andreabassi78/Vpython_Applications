@@ -4,41 +4,40 @@ Created on Mon May  4 00:17:57 2020
 
 @author: Andrea Bassi
 """
-import vpython as vp
-import numpy as np
+from vpython import sphere, helix, vector, color, rate, sqrt, pi, sin
 
 K = 1 # Elastic constant
 M = 1 # Mass
 LENGTH = 1 # Spring length
 RADIUS = 0.15*LENGTH # Mass radius
 
-rest_position    = vp.vector(LENGTH,0,0)
-initial_position = vp.vector(1.5,0,0)
-initial_velocity = vp.vector(0,0,0)
+rest_position    = vector(LENGTH,0,0)
+initial_position = vector(1.5,0,0)
+initial_velocity = vector(0,0,0)
 
 # Create a mass  
-mass = vp.sphere()
+mass = sphere()
 mass.pos = initial_position
 mass.radius = RADIUS
 mass.velocity = initial_velocity
-mass.color = vp.vector(0,0.56,0.61)             
+mass.color = vector(0,0.56,0.61)             
 
 # Create a spring        
-spring = vp.helix()
-spring.pos =  vp.vector(0,0,0)
+spring = helix()
+spring.pos =  vector(0,0,0)
 spring.axis = mass.pos
 spring.thickness = 0.05
 spring.radius = 0.3*RADIUS
-spring.color = vp.color.orange
+spring.color = color.orange
 
 # Set temporal sampling to 1/100 of the inverse of the oscillation frequency
-dt = 0.01*(2*np.pi*np.sqrt(M/K)) 
+dt = 0.01*(2*pi*sqrt(M/K))
 
 while True:  
-    vp.rate(100)  
+    rate(100)  
     mass.pos = mass.pos + mass.velocity*dt
-    spring.axis = mass.pos  
+    spring.axis = mass.pos
     delta = mass.pos - rest_position
-    acceleration = - (K* delta) / M     
+    acceleration = - (K* delta) / M 
     mass.velocity = mass.velocity + acceleration * dt
     

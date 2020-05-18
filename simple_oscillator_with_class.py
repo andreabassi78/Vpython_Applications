@@ -20,8 +20,6 @@ initial_position = vp.vector(1.5,0,0)
 initial_velocity = vp.vector(0,0,0)
 #initial_velocity = 1.0*vp.sqrt(K/M) * vp.vector(1,0,0)
 
-vp.scene.caption= "Oscillating mass"
-
 class oscillator:
         
     def __init__(self, radius, r0, v0 ):
@@ -50,9 +48,27 @@ class oscillator:
 
 osc = oscillator(RADIUS, initial_position, initial_velocity)
 
+
+vp.graph(scroll=True,
+         fast=False,
+         xmin=0, xmax=100,
+         xtitle = 'times(s)',
+         ytitle = 'delta (m)')
+
+g = vp.gcurve()
+
+time = 0
+
 while True:
+    
     vp.rate(100)
+    
+    time = time + dt
     osc.set_position(osc.mass.velocity,dt)        
     delta = osc.mass.pos - rest_position
     acceleration = - (K* delta) / M 
     osc.set_velocity(acceleration, dt)
+    
+    g.plot( time, delta.x )
+    
+    
