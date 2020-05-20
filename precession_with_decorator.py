@@ -9,14 +9,14 @@ from vpython import scene, vector, sin, cos, arrow,cone, quad, text, cross,dot, 
 LENGTH = 1.5
 
 SHAFTWIDTH = LENGTH/80
-HEADWIDTH = LENGTH/20
-HEADLENGTH = LENGTH/15
+HEADWIDTH = LENGTH/30
+HEADLENGTH = LENGTH/20
 
 RADIUS = 0.35 * LENGTH # arbitrary value        
 MASS = 0.1 # kg
 I = 3 * MASS * RADIUS**2 /10 # moment of inertia of the cone
 
-OMEGA = 2*pi*15 # rotation frequancy rad/s
+OMEGA = 2*pi * 15 # rotation frequancy rad/s
 ALPHA = 30 * pi/180 # initial orientation in xz plane
 
 
@@ -53,9 +53,6 @@ class spinning_top:
         self.weight = MASS*vector(0,-9.81,0)
         self.norm = -self.weight
         self.torque = cross(self.c_m, self.weight)
-        
-        #precession_omega = cross(self.L,self.torque)/mag2(self.L) / sin(ALPHA)
-        
         self.precession_omega = p_o = cross(self.L,self.torque)/mag2(self.L) / sin(ALPHA)
         self.friction =  - MASS * cross(p_o,cross(p_o,self.c_m))
 
@@ -63,7 +60,7 @@ class spinning_top:
                          axis =  - self.base,
                          radius = RADIUS,
                          length = LENGTH,
-                         texture = {'file':'kandinsky.jpg'}
+                         texture = {'file':'/images/kandinsky.jpg'}
                          )
         
         #self.application_points = { 'L':'base', 'torque':'t', 'weight':'c_m', 'norm': 'origin' }

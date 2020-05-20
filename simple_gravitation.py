@@ -17,6 +17,8 @@ moon.mass = 7.342e22
 moon.radius = 10e6 # Exaggerated size of the Moon
 moon.pos = vector(0, 4.054e8,0) # Moon at apogee (m)
 moon.velocity = vector(-970,0,0) # Moon velocity at apogeev(m/s)
+#moon.texture = {'file':'/images/moon.jpg'}
+
 
 earth =  sphere()
 earth.color =  vector(0,0.56,0.61)  
@@ -24,6 +26,7 @@ earth.mass = 5.972e24
 earth.radius = 50e6 # Exaggerated size of the Earth
 earth.pos = vector(0,0,0)
 earth.velocity =-moon.velocity*moon.mass/earth.mass # Conservation of momentum
+#earth.texture = {'file':'/images/earth.jpg'}
 
 while mag(moon.pos-earth.pos)>earth.radius:   
     rate(200)
