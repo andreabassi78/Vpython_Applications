@@ -11,6 +11,32 @@ import random
 pi = np.pi
 
 
+def repeat(*a, **par): 
+    # this is executed only once, during class instanciation
+    print(a)
+    print(par)
+    
+    def wrapper1(func): 
+        
+        not_executed = True
+        
+        def wrapper0(*args):
+            
+            if not_executed: print(len(args))
+            not_ecexuted = False
+            
+            sys = args[0]
+            for index,b in enumerate(sys.bodies):
+                    
+                    func(*args,b)
+                         
+            return not_ecexuted 
+        return wrapper0 
+    
+    return wrapper1 
+
+
+
 
 def cycle_over_all_bodies(function): 
     
@@ -46,10 +72,25 @@ class system:
         radius = (3/(4*pi)*mass/density)**(1/3) 
         return radius
     
-    @cycle_over_all_bodies
-    def set_position(self,index=0):
-        b = self.bodies[index] 
+    @repeat('0')
+    def set_position(self,b):
         b.pos = b.pos + b.velocity*self.dt
+    
+    @repeat(num=1)    
+    def bounce_on_border(self, LL, body):     
+            loc = body.pos
+            vel = body.velocity
+            if abs(loc.x) > LL/2:
+                if loc.x < 0: vel.x =  abs(vel.x)
+                else: vel.x =  -abs(vel.x)
+            if abs(loc.y) > LL/2:
+                if loc.y < 0: vel.y = abs(vel.y)
+                else: vel.y =  -abs(vel.y)
+            if abs(loc.z) > LL/2:
+                if loc.z < 0: vel.z =  abs(vel.z)
+                else: vel.z =  -abs(vel.z)    
+        
+        
         
     @cycle_over_all_bodies
     def set_velocity(self,index=0):
@@ -151,19 +192,7 @@ class system:
         self.collided_couples.clear()
         
        
-    def bounce_on_border(self, L = 2, index = 0):     
-        for index,body in enumerate(self.bodies):
-            loc = body.pos
-            vel = body.velocity
-            if abs(loc.x) > L/2:
-                if loc.x < 0: vel.x =  abs(vel.x)
-                else: vel.x =  -abs(vel.x)
-            if abs(loc.y) > L/2:
-                if loc.y < 0: vel.y = abs(vel.y)
-                else: vel.y =  -abs(vel.y)
-            if abs(loc.z) > L/2:
-                if loc.z < 0: vel.z =  abs(vel.z)
-                else: vel.z =  -abs(vel.z)
+   
                 
     def calculate_center_of_mass_and_energy(self):
         c_m =  vector(0,0,0)
@@ -175,7 +204,7 @@ class system:
             v_m += body.mass * body.velocity
             m_tot += body.mass
             KE += 1/2 * body.mass * mag(body.velocity)**2
-        print('Kinetic Energy (J):', KE)
+        #print('Kinetic Energy (J):', KE)
         #print('Center of Mass velocity:', mag(v_m/m_tot))
         return c_m/m_tot , KE        
       

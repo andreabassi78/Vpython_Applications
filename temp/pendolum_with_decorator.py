@@ -8,31 +8,24 @@ from vpython import scene, vector, sin, cos, arrow, sphere, quad, text, cross, r
 
 
 LENGTH = 20
-
-# draw ceiling
-a = vertex( pos=vector(-LENGTH/2,LENGTH,-LENGTH/2), texpos=vector(0,0,0))
-b = vertex( pos=vector(LENGTH/2,LENGTH,-LENGTH/2) , texpos=vector(1,0,0))
-c = vertex( pos=vector(LENGTH/2,LENGTH,LENGTH/2)  , texpos=vector(1,1,0))
-d = vertex( pos=vector(-LENGTH/2,LENGTH,LENGTH/2) , texpos=vector(0,1,0))
-Q = quad( vs =[a,b,c,d], texture = textures.wood )
-
 THETA = 30 * pi/180
 MASS = 1
 g = -9.81
+COLORS = (color.green,color.white,color.magenta,color.cyan)
 
 def vectorize(function):
     
     def inner(*args,**kwargs):
-        colors = [color.green,color.white,color.magenta,color.cyan]
+        
         vs = function(*args)
         sys = args[0]
         for index, v in enumerate(vs):
             if not inner.called: 
-                inner.vector[index]=arrow(color=colors[index],shaftwidth=0.3,headwidth=1,headlength=1)               
+                inner.vector[index]=arrow(color=COLORS[index],shaftwidth=0.3,headwidth=1,headlength=1)               
             inner.vector[index].pos = sys.body.pos
             inner.vector[index].axis = v
         inner.called = True
-        return vs
+        #return vs
     inner.called = False
     inner.vector = {}
     return inner
@@ -77,13 +70,18 @@ class pendolum:
         weight = g *vector(0,1,0) * MASS
         tension = MASS * (r/mag(r)*g*cos(self.angle) + cross(av,v)) 
         acceleration = (tension + weight) / MASS
+        return v, weight,tension,acceleration
 
-        return (v, weight,tension,acceleration)
-
-    
 p = pendolum(LENGTH,THETA)
 
 dt = 0.01    
+
+# draw ceiling
+a = vertex( pos=vector(-LENGTH/2,LENGTH,-LENGTH/2), texpos=vector(0,0,0))
+b = vertex( pos=vector(LENGTH/2,LENGTH,-LENGTH/2) , texpos=vector(1,0,0))
+c = vertex( pos=vector(LENGTH/2,LENGTH,LENGTH/2)  , texpos=vector(1,1,0))
+d = vertex( pos=vector(-LENGTH/2,LENGTH,LENGTH/2) , texpos=vector(0,1,0))
+Q = quad( vs =[a,b,c,d], texture = textures.wood )
 
 scene.center = vector(0,LENGTH/2,0)
 scene.waitfor('textures')
