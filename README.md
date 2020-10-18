@@ -1,2 +1,2 @@
 # Vpython_Applications
-Newtonian mechanics exaamples.
+Newtonian mechanics examples.
