@@ -6,6 +6,7 @@ Created on Sun May 17 22:04:25 2020
 """
 from vpython import scene, vector, sin, cos, arrow, sphere, quad, text, cross,dot, rate, mag, mag2, sqrt, textures, vertex, pi, color
 
+#import pdb
 
 LENGTH = 2
 
@@ -111,8 +112,11 @@ dt = 0.005
 
 scene.center = vector(0,LENGTH/2,0)
 scene.waitfor('textures')
+
+
     
 while True:
+    breakpoint()
     rate(50)
     p.set_velocity(dt)
     p.set_position(dt)

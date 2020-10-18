@@ -88,6 +88,9 @@ class spinning_top:
         self.precession_omega = p_o = mag(cross(self.L,self.torque)/mag2(self.L)) / sin(ALPHA) * vector(0,1,0)
         self.friction =  - MASS * cross(p_o,cross(p_o,self.c_m))
         return self.L, self.torque, self.weight, self.norm, self.friction
+
+
+# %% run code here
         
 # sampling time
 dt = 2*pi/OMEGA /100
