@@ -31,8 +31,8 @@ def check_collision(body0,body1):
     distance = mag(body0.pos-body1.pos)
     if distance <= (body0.radius+body1.radius):
         #totally_inelastic_collision(body0,body1)           
-        elastic_collision(body0,body1)           
-        #inelastic_collision(body0,body1)           
+        #elastic_collision(body0,body1)           
+        inelastic_collision(body0,body1)           
                                           
 def elastic_collision(body0,body1):
         vrel = body0.velocity - body1.velocity
@@ -76,9 +76,9 @@ def calculate_center_of_mass_and_energy(body0,body1):
 delta_t = 0.001 
 time = 0
 
-while True:   
+while mag(body0.pos)<1.5 and mag(body1.pos)<1.5:   
     rate(200)
-    time = time +delta_t
+    time = time + delta_t
     set_position([body0,body1],delta_t)      
     check_collision(body0,body1)
     c_m, v_m, KE = calculate_center_of_mass_and_energy(body0, body1)

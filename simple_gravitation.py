@@ -16,7 +16,7 @@ moon.color =  vector(0.81,0.83,0.22)
 moon.mass = 7.342e22
 moon.radius = 10e6 # Exaggerated size of the Moon
 moon.pos = vector(0, 4.054e8,0) # Moon at apogee (m)
-moon.velocity = vector(-970,0,0) # Moon velocity at apogeev(m/s)
+moon.velocity = vector(-970,0,0) # Moon velocity at apogee(m/s)
 #moon.texture = {'file':'/images/moon.jpg'}
 
 
@@ -28,11 +28,13 @@ earth.pos = vector(0,0,0)
 earth.velocity =-moon.velocity*moon.mass/earth.mass # Conservation of momentum
 #earth.texture = {'file':'/images/earth.jpg'}
 
-while mag(moon.pos-earth.pos)>earth.radius:   
+while mag(moon.pos-earth.pos)>earth.radius: 
+    
     rate(200)
     distance = moon.pos-earth.pos
+    u = distance / mag(distance)
     # Force excerted on the Moon
-    Force = - (G* earth.mass * moon.mass ) * distance / mag(distance)**3
+    Force = - u * (G * earth.mass * moon.mass ) / mag(distance)**2
     
     # Second Newton's laws
     moon.acceleration = Force / moon.mass 
