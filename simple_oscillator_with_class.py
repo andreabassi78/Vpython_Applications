@@ -5,10 +5,9 @@ Created on Mon May  4 00:17:57 2020
 @author: Andrea Bassi
 """
 import vpython as vp
-import numpy as np
 
 class oscillator:
-        
+      
     def __init__(self, k, m, radius, rest_position):
         # create elastic constant and mass attributes
         self.k = k
@@ -26,7 +25,7 @@ class oscillator:
         spring.color = vp.color.orange
         self.spring = spring
         # Set initial conditions to a default value
-        self.set_initial_conditions()        
+        self.set_initial_conditions(rest_position, vp.vector(0,0,0))        
         
     def set_position(self, dt):
         self.body.pos = self.body.pos + self.body.velocity*dt
@@ -60,19 +59,21 @@ REST_POSITION = vp.vector(LENGTH,0,0)
 osc = oscillator(K, M, RADIUS, REST_POSITION)
 
 # Define and set initial conditions
-initial_position = vp.vector(1.5,0,0)
-initial_velocity = vp.vector(0,0,0)
-osc.set_initial_conditions(initial_position, initial_velocity)        
+INITIAL_POSITION = vp.vector(1.5,0,0)
+INITIAL_VELOCITY = vp.vector(0,0,0)
+osc.set_initial_conditions(INITIAL_POSITION, INITIAL_VELOCITY)        
     
 # Set temporal sampling to 1/100 of the inverse of the oscillation frequency
-dt = 0.01*2*np.pi*np.sqrt(osc.m/osc.k)
+dt = 0.01*2*vp.pi*vp.sqrt(osc.m/osc.k)
 
 while True:
 
-    vp.rate(50)
+    vp.rate(100)
     osc.calculate_acceleration()       
     osc.set_velocity(dt)
-    osc.set_position(dt) 
+    osc.set_position(dt)
+    
+    
 
 
     
