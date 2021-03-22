@@ -4,7 +4,7 @@ Created on Mon May  4 20:12:04 2020
 
 @author: Andrea Bassi
 """
-from vpython import scene, vector, arrow, color, sphere, pi, mag, rate, attach_trail
+from vpython import scene, vector, color, sphere, pi, mag, rate
 
 G = 6.67408e-11 # Gravitational constant. All Units are in SI
 
