@@ -14,7 +14,7 @@ body.pos = vector(1,0,0)
 
 attach_trail(body)
 
-omega = 5 # rad/s
+omega = 5 # rad/s # modulo della velocità angolare 
 
 time = 0
 
@@ -29,7 +29,7 @@ while True:
     
     time = time + dt
     
-    body.pos.x = R* cos(omega*time)
+    body.pos.x = R* cos(omega*time) # coordinata x in un moto circolare uniforme
     body.pos.y = R* sin(omega*time)
     
     
