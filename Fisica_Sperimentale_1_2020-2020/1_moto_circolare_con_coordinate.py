@@ -16,14 +16,12 @@ attach_trail(body)
 
 omega = 5 # rad/s
 
-
 time = 0
 
 dt = 0.001
 
 axis_x = arrow(pos=vector(0,0,0), axis=vector(1,0,0), shaftwidth=0.01)            
 axis_y = arrow(pos=vector(0,0,0), axis=vector(0,1,0), shaftwidth=0.01)            
-
 
 while True:   
     

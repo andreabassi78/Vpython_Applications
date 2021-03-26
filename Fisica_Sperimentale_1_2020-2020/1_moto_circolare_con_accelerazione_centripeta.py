@@ -10,7 +10,7 @@ body.color = color.orange
 
 R = 1
 
-body.velocity = vector(0,1,0) # initial velocity
+body.velocity = vector(0,0.7,0) # velocità iniziale diretta verso l'alto
 body.pos = vector(R,0,0)
 
 attach_trail(body)
