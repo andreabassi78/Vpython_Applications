@@ -3,8 +3,9 @@ Created on Fri Mar 26 17:47:54 2021
 
 @author: Andrea Bassi
 """
-from vpython import scene, vector, arrow, color, sphere, rate, attach_trail, pi, mag
 
+from vpython import scene, vector, arrow, color, sphere, rate, attach_trail, pi, mag
+ 
 body = sphere(radius = 0.05)
 body.color = color.orange 
 
