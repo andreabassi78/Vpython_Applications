@@ -96,6 +96,7 @@ class system:
             if body in self.bodies:
                 self.bodies.remove(body)
         self.collided_couples.clear()
+  
         
     def inelastic_collision(self, K=40, B=1):
         # balls are modeled as elastic (springs) with a shear friction
@@ -119,7 +120,6 @@ class system:
         
     def partially_inelastic_collision(self):
         # totally inelastic collision, but if the couple of bodies collides with others can breack 
-        bodies_to_remove = []
         for indexs in self.collided_couples: 
             body0 = self.bodies[indexs[0]]
             body1 = self.bodies[indexs[1]]
@@ -171,8 +171,7 @@ class system:
       
          
 if __name__ == '__main__':
-    
-    
+       
     scene.caption= "Bouncing balls"
 
     # Draw box
@@ -198,17 +197,23 @@ if __name__ == '__main__':
     
     N =30 # number of bodies
     
-    masses =[]
-    initial_positions = []
-    initial_velocities = []
+        
+    m0 = 25 # kg. The first mass 
+    pos0 = vector(0,0,0) # it starts from the center 
+    v0 = vector(0,0,0) # it is at rest
     
-    for idx in range(N): 
-        # Each body has the same mass: the mass of the Moon 
+    masses =[m0] # list of masses, initialized with the first element 
+    initial_positions = [pos0]  
+    initial_velocities = [v0]
+    
+    for idx in range(1,N): 
+        # Each body has the same mass
         masses.append(1)   # kg  
         # Place the masses randomly in space
         initial_positions.append(vector.random()) # m
         # Give random initial velocities
-        initial_velocities.append(vector.random()) # m/2
+        initial_velocities.append(vector.random()) # m/s
+        
     
     sys = system(masses, initial_positions, initial_velocities, delta_t)
     
@@ -217,18 +222,18 @@ if __name__ == '__main__':
                     make_trail=True,
                     trail_type="points",
                     trail_radius= 5e-3,
-                    interval=5,
+                    interval=15,
                     retain=50) 
     
     while True:   
         
-        rate(150)
+        rate(50)
         
         sys.set_position()
         sys.bounce_on_border(L)        
         
         sys.check_collisions()
-        sys.inelastic_collision()
+        sys.elastic_collision()
         
         center_mass, KE = sys.calculate_center_of_mass_and_energy()
         trace.pos = center_mass
