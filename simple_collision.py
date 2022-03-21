@@ -30,8 +30,8 @@ def set_position(bodies,dt):
 def check_collision(body0,body1):
     distance = mag(body0.pos-body1.pos)
     if distance <= (body0.radius+body1.radius):
-        #totally_inelastic_collision(body0,body1)           
-        #elastic_collision(body0,body1)           
+        # totally_inelastic_collision(body0,body1)           
+        # elastic_collision(body0,body1)           
         inelastic_collision(body0,body1)           
                                           
 def elastic_collision(body0,body1):

@@ -36,12 +36,13 @@ dt = 0.01*(2*pi*sqrt(M/K))
 while True:
     
     rate(100)  
-    
+
     delta = body.pos - REST_POSITION
-    acceleration = - (K* delta) / M
+    acceleration = - (K* delta) / M 
     
     body.velocity = body.velocity + acceleration * dt
     
     body.pos = body.pos + body.velocity*dt
+    
     spring.axis = body.pos
     
