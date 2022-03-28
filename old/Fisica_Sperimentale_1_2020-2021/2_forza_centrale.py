@@ -16,13 +16,13 @@ def calola_energia_meccanica(body, k, M):
 body = sphere(radius = 0.05)
 body.color = color.orange 
 
-body.pos = vector(1,0,0) # posizione iniziale
-body.velocity = vector(0,0.5,0)
+body.pos = vector(1.0,0,0) # posizione iniziale
+body.velocity = vector(0,1.1,0)
 body.F = vector(0,0,0)
 
 attach_trail(body)
 attach_arrow(body, "F")
-k = 0.5 # 
+k = 1 # 
 M = 1
 
 # mostra gli assi x e y
