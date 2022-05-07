@@ -19,7 +19,7 @@ class system:
             body.radius = self.set_radius(m)
             body.pos = r0s[index]
             body.velocity = v0s[index]
-            body.color =  vector(0,0.56,0.61)        
+            body.color =  vector(0,0.76,0.71)        
             #body.acceleration_arrow =  arrow(pos=body.pos, axis= vector(0,0,0))
             self.bodies.append(body)
     def set_radius(self,mass):
@@ -87,7 +87,7 @@ class system:
                
         
 # Set temporal sampling in seconds 
-dt = 600 
+dt = 200 
 
 N = 50 # number of bodies
 
@@ -99,9 +99,9 @@ for idx in range(N):
     # Each body has the same mass: the mass of the Moon 
     masses.append(7.342e22) # kg  
     # Place the masses randomly in space
-    initial_positions.append( vector.random()*1e8) # m
+    initial_positions.append(vector.random()*1e8) # m
     # Give random initial velocities
-    initial_velocities.append( vector.random()*500) # m/s
+    initial_velocities.append( vector.random()*400) # m/s
 
 sys = system(masses, initial_positions, initial_velocities)
 
@@ -110,10 +110,10 @@ trace = sphere(radius = 1e6,
                make_trail=True,
                trail_type="points",
                trail_radius= 1e5,
-               interval=20,
-               retain=50)
+               interval=50,
+               retain=300)
 
-scene.caption= "N body problem"
+scene.caption= "N bodies problem"
 
 while True:   
     
