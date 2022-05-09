@@ -22,6 +22,7 @@ class system:
             body.color =  vector(0,0.76,0.71)        
             #body.acceleration_arrow =  arrow(pos=body.pos, axis= vector(0,0,0))
             self.bodies.append(body)
+    
     def set_radius(self,mass):
         # Draw a sphere with a radius proportional to the cubic root of the mass
         density = 3000 # kg/m^3
@@ -30,11 +31,11 @@ class system:
     
     def set_position(self, dt):
         for index, b in enumerate(self.bodies):
-            b.pos = b.pos + b.velocity*dt
+            b.pos += b.velocity*dt
     
     def set_velocity(self, dt):
         for index, b in enumerate(self.bodies):
-            b.velocity = b.velocity + self.accelerations[index]*dt
+            b.velocity += self.accelerations[index]*dt
     
     def calculate_acceleration(self):
         self.accelerations = [] 
