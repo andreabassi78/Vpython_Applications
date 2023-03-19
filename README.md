@@ -13,8 +13,8 @@ You can run the scripts (.py) from the IDE/console after installing vpython:
     pip install vpython
 
 
-[simple_motion.py] = https://github.com/andreabassi78/Vpython_Applications/blob/master/simple_motion.py
-[simple_circular_motion.py] = https://github.com/andreabassi78/Vpython_Applications/blob/master/simple_circular_motion.py
-[simple_oscillators.py] = https://github.com/andreabassi78/Vpython_Applications/blob/master/simple_oscillator.py
-[simple_gravitation.py] = https://github.com/andreabassi78/Vpython_Applications/blob/master/simple_gravitation.py
-[N_body_problem.py] = https://github.com/andreabassi78/Vpython_Applications/blob/master/N_bodies_problem.py
+[simple_motion.py] : https://github.com/andreabassi78/Vpython_Applications/blob/master/simple_motion.py
+[simple_circular_motion.py] : https://github.com/andreabassi78/Vpython_Applications/blob/master/simple_circular_motion.py
+[simple_oscillators.py] : https://github.com/andreabassi78/Vpython_Applications/blob/master/simple_oscillator.py
+[simple_gravitation.py] : https://github.com/andreabassi78/Vpython_Applications/blob/master/simple_gravitation.py
+[N_body_problem.py] : https://github.com/andreabassi78/Vpython_Applications/blob/master/N_bodies_problem.py
