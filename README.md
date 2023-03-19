@@ -3,12 +3,13 @@ Vpython code to simulate Newtonian mechanics.
 
 It includes scripts to simulate basic kinematics problems ([accelerated motion], [circular motion]), dynamics([oscillators], [gravitation]) and more advanced physics problems ([N bodies problem]).
 
-![raw](https://github.com/andreabassi78/Vpython_Applications/raw/master/demo_video/image.jpg)(https://github.com/andreabassi78/Vpython_Applications/raw/master/demo_video/N_bodies_problem.mp4)
+![raw](https://github.com/andreabassi78/Vpython_Applications/raw/master/demo_video/image.jpg) [download animation] 
 **Simulation  of a N-bodies problem, developed by the Engineering Physics students at Politecnico di Milano**
 
 
 ## Requirements
 You can run the scripts (.py) from the IDE/console after installing vpython:
+
     pip install vpython
 
 
@@ -17,3 +18,4 @@ You can run the scripts (.py) from the IDE/console after installing vpython:
 [oscillators]: https://github.com/andreabassi78/Vpython_Applications/blob/master/simple_oscillator.py
 [gravitation]: https://github.com/andreabassi78/Vpython_Applications/blob/master/simple_gravitation.py
 [N bodies problem]: https://github.com/andreabassi78/Vpython_Applications/blob/master/N_bodies_problem.py
+[download animation]: https://github.com/andreabassi78/Vpython_Applications/raw/master/demo_video/N_bodies_problem.mp4
