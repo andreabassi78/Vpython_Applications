@@ -7,12 +7,8 @@ It includes scripts to simulate basic kinematics problems ([accelerated motion],
 **Simulation  of a N-bodies problem, developed by the Engineering Physics students at Politecnico di Milano**
 
 
-
-
-
 ## Requirements
 You can run the scripts (.py) from the IDE/console after installing vpython:
-
     pip install vpython
 
 
