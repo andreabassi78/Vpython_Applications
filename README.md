@@ -8,7 +8,7 @@ It includes scripts to simulate basic kinematics problems ([accelerated motion],
 
 
 ## Requirements
-You can run the scripts (.py) from the IDE/console after installing vpython:
+You can run the scripts (.py) from the IDE/console after installing [vpython]:
 
     pip install vpython
 
@@ -19,3 +19,4 @@ You can run the scripts (.py) from the IDE/console after installing vpython:
 [gravitation]: https://github.com/andreabassi78/Vpython_Applications/blob/master/simple_gravitation.py
 [N bodies problem]: https://github.com/andreabassi78/Vpython_Applications/blob/master/N_bodies_problem.py
 [download animation]: https://github.com/andreabassi78/Vpython_Applications/raw/master/demo_video/N_bodies_problem.mp4
+[vpython]: https://vpython.org/
