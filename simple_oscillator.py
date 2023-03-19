@@ -41,8 +41,7 @@ while True:
 
     delta = body.pos - REST_POSITION
     
-    
-    acceleration = - (K* delta) / M - beta * body.velocity /M 
+    acceleration = - (K* delta) / M 
     
     body.velocity = body.velocity + acceleration * dt
     
