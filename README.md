@@ -5,7 +5,10 @@ It includes scripts to simulate basic kinematics problems ([simple_motion], [sim
 
 ![raw](https://github.com/andreabassi78/Vpython_Applications/raw/master/demo_video/N_bodies_problem.mp4)
 **Example of the code to simulate a N-bodies problem, developed by the Engineering Physics students at Politecnico di Milano**
- 
+
+
+
+
 
 ## Requirements
 You can run the scripts (.py) from the IDE/console after installing vpython:
