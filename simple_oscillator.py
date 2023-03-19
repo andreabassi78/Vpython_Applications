@@ -33,12 +33,16 @@ spring.color = color.orange
 # Set temporal sampling to 1/100 of the inverse of the oscillation frequency
 dt = 0.01*(2*pi*sqrt(M/K))
 
+beta = 0.15
+
 while True:
     
     rate(100)  
 
     delta = body.pos - REST_POSITION
-    acceleration = - (K* delta) / M 
+    
+    
+    acceleration = - (K* delta) / M - beta * body.velocity /M 
     
     body.velocity = body.velocity + acceleration * dt
     

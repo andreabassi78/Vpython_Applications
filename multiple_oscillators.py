@@ -75,11 +75,11 @@ class System():
         else:
             self.center_mass_trace.pos = center_mass
                                    
-N = 8
+N = 5
 sys = System(N)
 
-delta=vp.vector(0.6,0.0,0.0)
-sys.set_displacement(idx=4,delta=delta)
+delta=vp.vector(0.5,0.0,0.0)
+sys.set_displacement(idx=0,delta=delta)
 
 osc0 = sys.oscillators[0]        
 dt = 0.01*2*vp.pi*vp.sqrt(osc0.m/osc0.k)

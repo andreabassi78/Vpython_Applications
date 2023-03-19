@@ -6,6 +6,7 @@ Created on Mon May  6 10:10:23 2020
 from vpython import scene, vector, arrow, color, sphere, rate
 
 body = sphere(radius = 0.05)
+
 body.color = color.orange 
 
 acceleration = vector(0,-9.81,0) 

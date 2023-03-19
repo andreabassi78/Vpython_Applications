@@ -7,13 +7,14 @@ Created on Mon May  4 00:17:57 2020
 from vpython import vector, sphere, helix, rate, color, mag, pi, sqrt
 
 
-class Oscillator:
+class Oscillator():
     
     ''' 
     Base oscillator class
     '''
     
     def __init__(self, k=1.0, m=1.0, radius=0.1, length=1, origin = vector(0,0,0)):
+      
         # create elastic constant and mass attributes
         self.k = k
         self.m = m
@@ -73,6 +74,7 @@ if __name__ == '__main__':
     
     # Instantiate oscillator
     osc = Oscillator(K, M, RADIUS, LENGTH)
+    
     
     # Define and set initial conditions
     INITIAL_POSITION = vector(1,0,0)
