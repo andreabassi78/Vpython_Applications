@@ -18,6 +18,6 @@ You can run the scripts (.py) from the IDE/console after installing [vpython]:
 [oscillators]: https://github.com/andreabassi78/Vpython_Applications/blob/master/simple_oscillator.py
 [gravitation]: https://github.com/andreabassi78/Vpython_Applications/blob/master/simple_gravitation.py
 [N bodies problem]: https://github.com/andreabassi78/Vpython_Applications/blob/master/N_bodies_problem.py
-[Browninan motion]: https://github.com/andreabassi78/Vpython_Applications/blob/master/colliding_masses.py
+[Brownian motion]: https://github.com/andreabassi78/Vpython_Applications/blob/master/colliding_masses.py
 [download animation]: https://github.com/andreabassi78/Vpython_Applications/raw/master/demo_video/N_bodies_problem.mp4
 [vpython]: https://vpython.org/
