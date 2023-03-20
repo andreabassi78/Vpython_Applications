@@ -14,10 +14,11 @@ axis_y = arrow(pos=vector(0,0,0), axis=vector(0,1,0), shaftwidth=0.01)
 attach_trail(body, color = color.red)
 body.pos = vector(1,0,0)
 body.velocity = vector (0,1,0) # velocità diretta verso l'alto
-accelerazione = vector(0,0,0)
 
 while True:
     rate(100)
+    accelerazione_modulo = mag(body.velocity)**2/r
+    accelerazione = - accelerazione_modulo * body.pos / mag(body.pos) # versore dato da: body.pos/mag(body.pos)
     body.velocity  = body.velocity + accelerazione *dt
     body.pos = body.pos + body.velocity *dt
     
