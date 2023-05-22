@@ -32,6 +32,9 @@ def rimbalza_al_bordo(body, d):
 N = 1000 # numero di particelle
 particelle = [] # lista che conterrà tutte le particelle (sphere)
 
+g = 3 
+
+
 for index in range(N):
     particella = sphere()
     particella.mass = 0.01
@@ -39,7 +42,19 @@ for index in range(N):
     particella.pos = vector.random()
     particella.velocity = vector.random()
     particella.color =  color.orange
+    particella.acceleration = vector(0,-g,0)
     particelle.append(particella)  
+
+
+# definisco il corpo polline
+polline = sphere()
+polline.mass = 1
+polline.radius = 0.15
+polline.pos = vector(0,0,0)
+polline.velocity = vector(3,0,0)
+polline.acceleration = vector(0,-g,0)
+polline.color = color.green
+attach_trail(polline, radius=0.006, retain=200, pps=1, type='points')
 
 
 
@@ -69,10 +84,25 @@ t = 0
 while t<10:   
     
     rate(50)
+
+    polline.velocity += polline.acceleration *dt
+    polline.pos += polline.velocity*dt
+    rimbalza_al_bordo(polline,d)
+
+    for particella in particelle:
+        distance = mag(particella.pos-polline.pos)
+        if distance < particella.radius + polline.radius:
+            urto_elastico(polline, particella)
+
+
     
     # aggiorna la posizione di ogni particella
     for particella in particelle:
+        particella.velocity += particella.acceleration*dt
         particella.pos += particella.velocity*dt 
         rimbalza_al_bordo(particella,d)
     
     t += dt
+
+    grafico0.plot(t, abs(polline.velocity.x) )
+    grafico1.plot(t, abs(polline.velocity.y) )
