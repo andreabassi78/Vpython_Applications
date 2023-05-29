@@ -75,7 +75,6 @@ if __name__ == '__main__':
     # Instantiate oscillator
     osc = Oscillator(K, M, RADIUS, LENGTH)
     
-    
     # Define and set initial conditions
     INITIAL_POSITION = vector(1,0,0)
     INITIAL_VELOCITY = vector(0.5,0,0)
