@@ -33,7 +33,6 @@ spring.color = color.orange
 # Set temporal sampling to 1/100 of the inverse of the oscillation frequency
 dt = 0.01*(2*pi*sqrt(M/K))
 
-beta = 0.15
 
 while True:
     

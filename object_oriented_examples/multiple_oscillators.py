@@ -56,12 +56,11 @@ class System():
         c_m =  vp.vector(0,0,0)
         v_m =  vp.vector(0,0,0)
         m_tot = 0
-        for index,osc in enumerate(self.oscillators):
+        for osc in self.oscillators:
             c_m += osc.m * osc.body.pos
             v_m += osc.m * osc.body.velocity
             m_tot += osc.m
-        # print('center of mass speed(m/s)):', vp.mag(v_m/m_tot),'\n'
-        #       'total mass (kg):', m_tot)
+        
         return (c_m/m_tot)
     
     def show_center_of_mass(self, center_mass):
