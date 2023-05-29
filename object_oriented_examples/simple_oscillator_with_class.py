@@ -13,7 +13,7 @@ class Oscillator():
     Base oscillator class
     '''
     
-    def __init__(self, k=1.0, m=1.0, radius=0.1, length=1, origin = vector(0,0,0)):
+    def __init__(self, k=1.0, m=1.0, radius=0.1, length=1.0, origin = vector(0,0,0)):
       
         # create elastic constant and mass attributes
         self.k = k
